@@ -3,6 +3,13 @@ Digital Holography Mini Project
 
 To run a simulation of digital holography on an optical field affected by atmospheric turbulence, run GenHologram.m
 
+## Setup and Theory:
+Here, the pupil wavefront is imaged onto a focal plane array using a 4f system. Theory is outlined in broad strokes. Lowercase u is in space domain, uppercase U is in frequency domain.
+
+<img width="1795" height="2335" alt="image" src="https://github.com/user-attachments/assets/2877e083-108f-4f01-bc35-c5d36f2e4bda" />
+
+
+## Results
 Simulates atmospheric turbulence through a 1-layer Kolmogorov Phase Screen.
 
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/3beadb67-6db6-4682-ba60-d3f7d7006d91" />
@@ -29,3 +36,12 @@ The tilted clones of the aperture field fourier transform can be cropped and cen
 Compare to the original phase at the aperture:
 
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/304ce69d-9718-48cf-ae2e-9ec0fb3d50bf" />
+
+## References
+1. Advanced Sensing Using Ditital Holography - Mark Spencer
+
+https://www.researchgate.net/publication/366183165_Advanced_Sensing_Using_Digital_Holography
+
+3. Numerical Simulations of Optical Wave Propagation with Examples in MATLAB - Jason Schmidt
+   
+https://www.amazon.com/Numerical-Simulation-Propagation-Examples-Monograph/dp/0819483265
