@@ -1,0 +1,87 @@
+clear
+clf
+addpath("PropagationLib_mini")
+addpath("Schmidt_Code\Functions")
+
+%Generate Kolmogorov Phase Screen
+lambda = 1064e-9; %Wavelength of laser in field 
+k = 2*pi/lambda;
+cn2 = 1e-15;
+dx = 8e-6*100; %.5m tac ap/#pixels - Refine calc for real ATS
+dz = 5000; %Distance in the lab
+r0 = (.423*(k^2)*cn2*dz)^(-3/5); %Calculated with plan wave approx
+IS = 8e-6*100; %Same as dx
+N = 1600;
+OS = IS*N;
+
+%(r0, N, deltaGrid, OuterScale, InnerScale)
+%More accurate - Subharmonic Fourier Phase Screen
+[phzlo, phzhi] = ft_sh_phase_screen(r0, N, dx,OS,IS);
+phz = phzlo + phzhi;
+
+figure(1)
+imagesc(phz)
+colorbar
+title("Atmoshperic Turbulence")
+
+%Generate input aperture to AO System
+X = linspace(-.5, .5, N+1);
+X = X(1:N);
+Y = linspace(-.5, .5, N+1);
+Y = Y(1:N);
+z = dz;
+[X,Y] = meshgrid(X,Y);
+
+%Input field phase shifted by phase screen
+Uin = exp(1i.*phz);
+
+figure
+imagesc(angle(Uin));
+title("Phase of Field Before Propagation")
+colorbar
+
+%Propagate forward to a pupil, which is imaged onto a focal plane array
+[U1, X2, Y2] = fresnelProp(Uin, X, Y, z, lambda);
+U1(abs(X2.^2 + Y2.^2) > 0.1) = 0;
+
+figure
+imagesc(angle(U1))
+colorbar
+title("Phase of field at pupil")
+
+figure
+imagesc(abs(U1))
+colorbar
+title("Amplitude of field at pupil")
+
+%Interfere pupil with a tilted beam
+U2 = 5*exp(1i*(790*pi.*X2 + 790*pi.*Y2));
+figure
+imagesc(angle(U2));
+colorbar
+title("Phase of Reference Beam")
+
+%Create Interferogram
+I1 = abs(U1+U2).^2;
+figure
+imagesc(I1)
+colorbar
+title("Interferogram at Focal Plane Array (Real Valued)")
+
+%Reconstruct the phase at the aperture
+FourierPlane = fftshift(fft2(fftshift(I1)));
+figure
+imagesc(log(abs(FourierPlane)))
+colorbar
+title("Fouerier Transform of Focal Plane Array (Log Amplitude)")
+
+figure
+imagesc(log(abs(FourierPlane(1:600, 1:600))))
+colorbar
+title("Cropped Fourier Plane")
+
+ReconAp = fftshift(ifft2(fftshift(FourierPlane(1:600, 1:600))));
+figure
+imagesc(angle(ReconAp(1:600, 1:600)))
+colorbar
+title("Reconstructed Phase")
