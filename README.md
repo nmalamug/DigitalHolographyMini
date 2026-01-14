@@ -21,7 +21,7 @@ With this intensity-only interferogram on the focal plane array, a Fourier Trans
 
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/d1d738b4-61f7-4c38-a9af-3e33d75d972e" />
 
-The tilted clones of the aperture field fourier transform can be cropped and centered. After a FFT, the original aperture field is recovered. 
+The tilted clones of the aperture field fourier transform can be cropped and centered. After an inverse Fourier Transform, the original aperture field is recovered. 
 
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/de8021d6-3ae9-40a9-84f5-23dd14f53214" />
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/0fe4f1a6-ff37-4f02-bb36-98beec119ae0" />
