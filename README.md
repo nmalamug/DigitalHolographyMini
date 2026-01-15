@@ -24,7 +24,7 @@ We can then get an interferogram by interfering with a tilted reference beam.
 
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/9be25e80-c13a-4246-b221-cb4a27d331af" />
 
-With this intensity-only interferogram on the focal plane array, a Fourier Transform reveals the tilted clones of the aperture field. 
+With this intensity-only interferogram on the focal plane array, a Fourier Transform reveals the tilted clones of the aperture field Fourier Transform. 
 
 <img width="577" height="371" alt="image" src="https://github.com/user-attachments/assets/d1d738b4-61f7-4c38-a9af-3e33d75d972e" />
 
